@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Image from "next/image";
+
 const poppins = localFont({
   src: "./fonts/Poppins-ExtraLight.ttf",
   variable: "--font-poppins-sans",
