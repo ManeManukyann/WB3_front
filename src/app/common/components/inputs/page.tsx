@@ -22,7 +22,7 @@ export default function Input({ text, placeholder, name }: InputProps) {
         placeholder={placeholder}
         name={name}
         autoComplete="off"
-        className="h-12 w-full rounded-xl border border-dark py-2 pl-3 pr-[10.75rem] text-left placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300"
+        className="h-12 w-[350px] flex py-3 px-4 items-center gap-3 self-stretch rounded-xl border border-dark text-left placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300"
       />
       {text === "password" && (
         <p onClick={handleClick} className="absolute right-3 cursor-pointer">
