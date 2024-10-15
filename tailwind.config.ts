@@ -25,6 +25,7 @@ const config: Config = {
         grey: "#F7F9F9",
         green: "#00CE72",
         borderColor: "#0E373C",
+        iconDivColor: "#F6F9F9",
       },
       fontSize: {
         lg: "32px",
@@ -53,6 +54,7 @@ const config: Config = {
       borderRadius: {
         sm: "8px",
         md: "12px",
+        lg: "24px",
       },
     },
   },
