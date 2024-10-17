@@ -26,6 +26,9 @@ const config: Config = {
         green: "#00CE72",
         borderColor: "#0E373C",
         iconDivColor: "#F6F9F9",
+        inputTextColor: "#f6f9f9",
+        modalTextColor: "#0f1617cc",
+        modalDescription: "#0f161766",
       },
       fontSize: {
         lg: "32px",
@@ -54,6 +57,7 @@ const config: Config = {
       borderRadius: {
         sm: "8px",
         md: "12px",
+        md1: "16px",
         lg: "24px",
       },
     },
