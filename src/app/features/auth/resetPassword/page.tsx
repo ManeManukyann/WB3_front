@@ -9,7 +9,7 @@ export default function createNewPassword() {
           Enter new password
         </p>
         <Input placeholder="Password" text={"password"} />
-        <Button name="Reset password" />
+        <Button name="Reset password" backgroundColor="#0B97A7" />
       </div>
     </div>
   );

@@ -29,6 +29,7 @@ const config: Config = {
         inputTextColor: "#f6f9f9",
         modalTextColor: "#0f1617cc",
         modalDescription: "#0f161766",
+        modalPColor: "#0F181733",
       },
       fontSize: {
         lg: "32px",

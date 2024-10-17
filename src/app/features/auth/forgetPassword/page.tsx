@@ -14,7 +14,7 @@ export default function ForgetPassword() {
           <Input placeholder="Email" text={"email"} />
         </div>
         <Link href="/features/auth/enterVerificationCode" className="w-full">
-          <Button name="Send" />
+          <Button name="Send" backgroundColor="#0B97A7" />
         </Link>
       </div>
     </div>

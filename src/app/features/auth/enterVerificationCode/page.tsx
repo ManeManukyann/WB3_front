@@ -11,7 +11,7 @@ export default function EnterVerificationCode() {
         </p>
         <Input placeholder="Enter your code" text="text" />
         <Link href={"/features/auth/resetPassword"} className="w-full">
-          <Button name="Send" />
+          <Button name="Send" backgroundColor={"#0B97A7"} />
         </Link>
       </div>
     </div>

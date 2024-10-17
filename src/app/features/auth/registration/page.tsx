@@ -16,7 +16,7 @@ export default function SignUp() {
           <Input placeholder="Email" text={"email"} />
           <Input placeholder="Password" text={"password"} />
         </div>
-        <Button name="Sign Up" />
+        <Button name="Sign Up" backgroundColor="#0B97A7" />
         <Link href="/features/auth/login">Log in</Link>
       </div>
     </div>

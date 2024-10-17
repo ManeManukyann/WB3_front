@@ -53,7 +53,7 @@ export default function ProductsTable() {
         <div id="actions" className="w-[659px] h-max flex items-center gap-3">
           <SearchInput />
           <SelectComponent />
-          <Button name={"New Product"} />
+          <Button name={"New Product"} backgroundColor="#0B97A7" />
         </div>
       </div>
       <div className="header flex items-center justify-between w-full h-max py-3 px-6 gap-6 self-stretch  border-b-[1px]">
@@ -83,7 +83,7 @@ export default function ProductsTable() {
           href={""}
           className="w-[80px] flex flex-col justify-center items-center gap-[10px] "
         >
-          <Button name={"CSV"} />
+          <Button name={"CSV"} backgroundColor="#0B97A7" />
         </Link>
       </div>
       {Array.isArray(products.data.items) && products.data.items.length > 0 ? (
