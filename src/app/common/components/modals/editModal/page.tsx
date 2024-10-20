@@ -3,25 +3,28 @@ import Input from "../../inputs/page";
 import { useEffect, useState } from "react";
 import Button from "../../buttons";
 
-interface CreateProductProps {
+interface EditModalProps {
   name: string;
   productNameProps: string;
   skuProps: string;
-  categoryProps: string;
+  titleProps: string;
   priceProps: number;
   quantityProps: number;
   imageProps: string;
+  isVisible?: boolean;
+  onClose: () => {};
 }
 
-export default function CreateProductModal({
+export default function EditModal({
   name,
   productNameProps,
   skuProps,
-  categoryProps,
+  titleProps,
   priceProps,
   quantityProps,
   imageProps,
-}: CreateProductProps) {
+  onClose,
+}: EditModalProps) {
   const [productName, setProductName] = useState("");
   const [sku, setSku] = useState("");
   const [title, settitle] = useState("");
@@ -32,7 +35,7 @@ export default function CreateProductModal({
   useEffect(() => {
     setProductName(productNameProps),
       setSku(skuProps),
-      setCategory(categoryProps),
+      settitle(titleProps),
       setPrice(String(priceProps));
     setQuantity(String(quantityProps)), setImage(imageProps);
   }, [
@@ -52,18 +55,18 @@ export default function CreateProductModal({
             {name}
           </h1>
           <Link href="/">
-            <div className="w-[30px] h-max  px-2 py-2 bg-iconDivColor rounded-lg">
+            <div
+              className="w-[30px] h-max  px-2 py-2 bg-iconDivColor rounded-lg"
+              onClick={onClose}
+            >
               <img src="/icons/x.svg" alt="" />
             </div>
           </Link>
         </div>
 
         <div className="w-full h-max flex items-start gap-3 self-stretch">
-          <div className="imageFiled w-[268px] h-[268px] px-4 py-3 flex flex-col justify-center items-center gap-2 rounded-md ">
-            <img src="/icons/image.svg" alt="" className="w-[40px] h-[40px]" />
-            <p className="text-modalPColor font-poppins normal text-md font-regular leading-line3">
-              Product image
-            </p>
+          <div className="imageFiled w-[268px] h-[268px] px-4 py-3 flex flex-col justify-center items-center gap-2 rounded-md relative">
+            <img src={image} alt="" className="w-full h-full object-cover" />
           </div>
 
           <div className="details w-[280px] h-[268px] flex flex-col items-start gap-[7px]">
@@ -79,7 +82,6 @@ export default function CreateProductModal({
               value={sku}
               onChange={(e) => setSku(e.target.value)}
             />
-            {/* For caegory input I must get all categories */}
             <Input
               text={"text"}
               placeholder={"title"}
@@ -101,13 +103,16 @@ export default function CreateProductModal({
           </div>
         </div>
 
-        <div className="buttons w-full h-max p-2 flex justify-end items-start self-stretch gap-2">
+        <div
+          className="buttons w-full h-max p-2 flex justify-end items-start self-stretch gap-2"
+          onClick={onClose}
+        >
           <Button
             name={"Cancel"}
             backgroundColor={"#0F16170D"}
-            textColor={"#0E373C"}
+            textColor="#0E373C"
           />
-          <Button name={"Next"} backgroundColor={"#0B97A7"} />
+          <Button name={"Save"} backgroundColor={"#0B97A7"} />
         </div>
       </div>
     </div>
