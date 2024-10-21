@@ -32,7 +32,7 @@ export default function Input({
         value={value}
         onChange={onChange}
         autoComplete="off"
-        className="h-12 w-full flex py-3 px-4 items-center gap-3 self-stretch rounded-xl border border-dark text-left placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300"
+        className="inputsss h-12 w-full flex py-3 px-4 items-center gap-3 self-stretch rounded-xl border border-dark text-left placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300"
       />
       {text === "password" && (
         <p onClick={handleClick} className="absolute right-3 cursor-pointer">
