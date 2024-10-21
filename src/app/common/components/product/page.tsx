@@ -6,6 +6,7 @@ import ProductInformation from "../modals/infoModal/page";
 import DeleteProduct from "../modals/deleteModal/page";
 
 interface ProductProps {
+  id: number;
   image: string;
   name: string;
   sku: string;
@@ -17,6 +18,7 @@ interface ProductProps {
 }
 
 export default function Product({
+  id,
   image,
   name,
   sku,
@@ -80,6 +82,7 @@ export default function Product({
 
       {activeModal === "info" && (
         <ProductInformation
+          id={id}
           isVisible={true}
           onClose={() => setActiveModal(null)}
           name={"Product Information"}
@@ -96,6 +99,7 @@ export default function Product({
 
       {activeModal === "edit" && (
         <EditModal
+          id={id}
           isVisible={true}
           name={"Edit Product"}
           productNameProps={name}

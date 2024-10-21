@@ -1,7 +1,9 @@
+"use client";
 import Link from "next/link";
 import Input from "../../inputs/page";
 import { useEffect, useState } from "react";
 import Button from "../../buttons";
+import { useRouter } from "next/navigation";
 
 interface CreateProductProps {
   name: string;
@@ -11,6 +13,8 @@ interface CreateProductProps {
   priceProps: number;
   quantityProps: number;
   imageProps: string;
+  onClose?: () => void;
+  isVisible?: boolean;
 }
 
 export default function CreateProductModal({
@@ -21,10 +25,19 @@ export default function CreateProductModal({
   priceProps,
   quantityProps,
   imageProps,
+  onClose,
+  isVisible,
 }: CreateProductProps) {
+  if (!isVisible) return null;
+
+  const descriptionPage = () => {
+    const router = useRouter();
+    router.push("/common/components/modals/newProductDescription");
+  };
+
   const [productName, setProductName] = useState("");
   const [sku, setSku] = useState("");
-  const [title, settitle] = useState("");
+  const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [image, setImage] = useState("");
@@ -32,16 +45,17 @@ export default function CreateProductModal({
   useEffect(() => {
     setProductName(productNameProps),
       setSku(skuProps),
-      setCategory(categoryProps),
+      setTitle(categoryProps),
       setPrice(String(priceProps));
     setQuantity(String(quantityProps)), setImage(imageProps);
   }, [
     productNameProps,
     skuProps,
-    titleProps,
+    categoryProps,
     priceProps,
     quantityProps,
     imageProps,
+    onClose,
   ]);
 
   return (
@@ -51,11 +65,12 @@ export default function CreateProductModal({
           <h1 className="w-[205px] h-[26px] text-borderColor text-[20px] font-semibold leading-line1">
             {name}
           </h1>
-          <Link href="/">
-            <div className="w-[30px] h-max  px-2 py-2 bg-iconDivColor rounded-lg">
-              <img src="/icons/x.svg" alt="" />
-            </div>
-          </Link>
+          <div
+            className="w-[30px] h-max  px-2 py-2 bg-iconDivColor rounded-lg"
+            onClick={onClose}
+          >
+            <img src="/icons/x.svg" alt="" />
+          </div>
         </div>
 
         <div className="w-full h-max flex items-start gap-3 self-stretch">
@@ -84,7 +99,7 @@ export default function CreateProductModal({
               text={"text"}
               placeholder={"title"}
               value={title}
-              onChange={(e) => settitle(e.target.value)}
+              onChange={(e) => setTitle(e.target.value)}
             />
             <Input
               text={"text"}
@@ -107,7 +122,13 @@ export default function CreateProductModal({
             backgroundColor={"#0F16170D"}
             textColor={"#0E373C"}
           />
-          <Button name={"Next"} backgroundColor={"#0B97A7"} />
+          <Link href={"/app/common/components/modals/newProductDescription"}>
+            <Button
+              name={"Next"}
+              backgroundColor={"#0B97A7"}
+              onClick={descriptionPage}
+            />
+          </Link>
         </div>
       </div>
     </div>
