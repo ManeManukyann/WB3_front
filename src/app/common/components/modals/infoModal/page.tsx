@@ -6,6 +6,7 @@ import Modal from "../modal/page";
 import FillProductDescription from "../newProductDescription/page";
 
 interface ProductInformationProps {
+  id: number;
   name: string;
   productName: string;
   image: string;
@@ -20,6 +21,7 @@ interface ProductInformationProps {
 }
 
 export default function ProductInformation({
+  id,
   isVisible,
   onClose,
   name,
@@ -40,14 +42,12 @@ export default function ProductInformation({
           <h1 className="w-[205px] h-[26px] text-borderColor text-[20px] font-semibold leading-line1">
             {name}
           </h1>
-          <Link href="/">
-            <div
-              className="w-[30px] h-max  px-2 py-2 bg-iconDivColor rounded-lg"
-              onClick={onClose}
-            >
-              <img src="/icons/x.svg" alt="" />
-            </div>
-          </Link>
+          <div
+            className="w-[30px] h-max  px-2 py-2 bg-iconDivColor rounded-lg"
+            onClick={onClose}
+          >
+            <img src="/icons/x.svg" alt="" />
+          </div>
         </div>
         <TabGroup>
           <TabList className="w-[100%] h-[32px] flex justify-between flex-center self-stretch items-center pb-10    ">
@@ -75,7 +75,10 @@ export default function ProductInformation({
               />
             </TabPanel>
             <TabPanel>
-              <FillProductDescription name={"name"} description={description} />
+              <FillProductDescription
+                name={"Product Description"}
+                description={description}
+              />
             </TabPanel>
             <TabPanel>History</TabPanel>
           </TabPanels>

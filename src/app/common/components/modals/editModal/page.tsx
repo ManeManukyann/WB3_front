@@ -1,9 +1,11 @@
+"use client";
 import Link from "next/link";
 import Input from "../../inputs/page";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import Button from "../../buttons";
-
+import CategorySelect from "../../categorySelect/page";
 interface EditModalProps {
+  id: number;
   name: string;
   productNameProps: string;
   skuProps: string;
@@ -16,6 +18,7 @@ interface EditModalProps {
 }
 
 export default function EditModal({
+  id,
   name,
   productNameProps,
   skuProps,
@@ -27,7 +30,7 @@ export default function EditModal({
 }: EditModalProps) {
   const [productName, setProductName] = useState("");
   const [sku, setSku] = useState("");
-  const [title, settitle] = useState("");
+  const [title, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [image, setImage] = useState("");
@@ -35,7 +38,7 @@ export default function EditModal({
   useEffect(() => {
     setProductName(productNameProps),
       setSku(skuProps),
-      settitle(titleProps),
+      setCategory(titleProps),
       setPrice(String(priceProps));
     setQuantity(String(quantityProps)), setImage(imageProps);
   }, [
@@ -47,6 +50,21 @@ export default function EditModal({
     imageProps,
   ]);
 
+  const handleSave = () => {
+    const updatedProduct = {
+      productName,
+      sku,
+      title,
+      price: Number(price),
+      quantity: Number(quantity),
+      image,
+    };
+
+    console.log("Update Propduct", updatedProduct);
+
+    onClose();
+  };
+
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center flex-col">
       <div className="flex flex-col p-5 border w-[560px] h-max shadow-lg rounded-md bg-white gap-6 ">
@@ -54,19 +72,22 @@ export default function EditModal({
           <h1 className="w-[205px] h-[26px] text-borderColor text-[20px] font-semibold leading-line1">
             {name}
           </h1>
-          <Link href="/">
-            <div
-              className="w-[30px] h-max  px-2 py-2 bg-iconDivColor rounded-lg"
-              onClick={onClose}
-            >
-              <img src="/icons/x.svg" alt="" />
-            </div>
-          </Link>
+          <div
+            className="w-[30px] h-max  px-2 py-2 bg-iconDivColor rounded-lg"
+            onClick={onClose}
+          >
+            <img src="/icons/x.svg" alt="" />
+          </div>
         </div>
 
         <div className="w-full h-max flex items-start gap-3 self-stretch">
           <div className="imageFiled w-[268px] h-[268px] px-4 py-3 flex flex-col justify-center items-center gap-2 rounded-md relative">
-            <img src={image} alt="" className="w-full h-full object-cover" />
+            {/* <img src={image} alt="" className="w-full h-full " /> */}
+            <img
+              src={`http://localhost:3003/${[image]}`}
+              alt=""
+              className="w-[full] h-[full] rounded-md object-cover"
+            />
           </div>
 
           <div className="details w-[280px] h-[268px] flex flex-col items-start gap-[7px]">
@@ -82,12 +103,7 @@ export default function EditModal({
               value={sku}
               onChange={(e) => setSku(e.target.value)}
             />
-            <Input
-              text={"text"}
-              placeholder={"title"}
-              value={title}
-              onChange={(e) => settitle(e.target.value)}
-            />
+            <CategorySelect onChange={(e) => setPrice(e.target.value)} />
             <Input
               text={"text"}
               placeholder={"Price"}
@@ -112,7 +128,11 @@ export default function EditModal({
             backgroundColor={"#0F16170D"}
             textColor="#0E373C"
           />
-          <Button name={"Save"} backgroundColor={"#0B97A7"} />
+          <Button
+            name={"Save"}
+            backgroundColor={"#0B97A7"}
+            onClick={handleSave}
+          />
         </div>
       </div>
     </div>
