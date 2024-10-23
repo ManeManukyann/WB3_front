@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useEffect, useState } from "react";
 import Button from "@/app/common/components/buttons";
@@ -6,123 +7,84 @@ import SearchInput from "@/app/common/components/searchInput/page";
 import Product from "@/app/common/components/product/page";
 import Link from "next/link";
 import Logout from "@/app/common/components/modals/logoutModal/page";
-import CreateProductModal from "@/app/common/components/modals/newProductModal/page";
-import Pagination from "@etchteam/next-pagination";
-import ReactPaginate from "react-paginate";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-
-interface NewProductProps {
-  name: string;
-  sku: string;
-  quantity: number;
-  category: string;
-  price: number;
-  image: string;
-  description: string;
-}
-
-export const getAllProducts = async () => {
+import CreateProductModal from "@/app/common/components/modals/addNewProduct/newProductModal/page";
+import Pagination from "@/app/common/components/pagination/page";
+export const getAllProducts = async (page: number) => {
   try {
-    const response = await fetch(`http://localhost:3003/products/`, {
-      method: "GET",
+    const response = await fetch(`http://localhost:3003/products/?page=${page}`, {
+      method: "GET"
     });
 
     if (!response.ok) {
       throw new Error(`Error: ${response.status} ${response.statusText}`);
     }
 
-    return response.json();
+    const data = await response.json();
+    return data;
   } catch (error) {
-    return { data: { items: [], pages: 0 } };
+    alert(error);
   }
+  return { data: { items: [], pages: 0 } };
 };
 
-export default function ProductsTable({
-  name,
-  sku,
-  quantity,
-  category,
-  price,
-  image,
-  description,
-}: NewProductProps) {
+export default function ProductsTable() {
+  const downloadCSV = async () => {
+    const response = await fetch("http://localhost:3003/export-csv/");
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "inventory.csv";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  };
   const [products, setProducts] = useState({ data: { items: [], pages: 0 } });
-  const [activeModal, setActiveModal] = useState<
-    "logout" | "addProduct" | null
-  >(null);
+  const [activeModal, setActiveModal] = useState<"logout" | "addProduct" | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 7;
+  const pagesData: number[] = [];
+  for (let i = 1; i < products.data.pages + 1; i++) {
+    pagesData.push(i);
+  }
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const productsData = await getAllProducts();
+      const productsData = await getAllProducts(currentPage);
       setProducts(productsData);
     };
 
     fetchProducts();
-  }, []);
-
-  const handlePrevClick = () => {
-    console.log(1);
-  };
-
-  const handleNextClick = () => {
-    console.log(2);
-  };
+  }, [currentPage]);
 
   return (
-    <div className="w-full h-screen py-4 pl-4 pr-6 flex flex-col items-start gap-4 bg-bg ">
-      <div className="header w-full h-[48px] flex justify-between items-center self-stretch">
-        <div
-          id="user"
-          className="w-max h-max flex px-4 py-2 items-center gap-3 rounded-sm bg-logInBoxColor"
-        >
-          <p className="userName overflow-hidden text-borderColor text-ellipsis font-poppins text-md font-semibold leading-line3">
+    <div className="flex h-screen w-full flex-col items-start gap-4 bg-bg py-4 pl-4 pr-6">
+      <div className="header flex h-[48px] w-full items-center justify-between self-stretch">
+        <div id="user" className="flex h-max w-max items-center gap-3 rounded-sm bg-logInBoxColor px-4 py-2">
+          <p className="userName overflow-hidden text-ellipsis font-poppins text-md font-semibold leading-line3 text-borderColor">
             Mane Manukyan
           </p>
-          <div
-            className="flex p-2 items-center gap-[10px] rounded-lg bg-slate-100"
-            onClick={() => setActiveModal("logout")}
-          >
-            <img src="/icons/logout.svg" alt="" className="w-[16px] h-[16px]" />
+          <div className="flex items-center gap-[10px] rounded-lg bg-slate-100 p-2" onClick={() => setActiveModal("logout")}>
+            <img src="/icons/logout.svg" alt="" className="h-[16px] w-[16px]" />
           </div>
         </div>
-        <div id="actions" className="w-[659px] h-max flex items-center gap-3">
+        <div id="actions" className="flex h-max w-[659px] items-center gap-3">
           <SearchInput />
           <SelectComponent />
-          <Button
-            name={"New Product"}
-            backgroundColor="#0B97A7"
-            onClick={() => setActiveModal("addProduct")}
-          />
+          <Button name={"New Product"} backgroundColor="#0B97A7" onClick={() => setActiveModal("addProduct")} />
         </div>
       </div>
-      <div className="header flex items-center justify-between w-full h-max py-3 px-6 gap-6 self-stretch  border-b-[1px]">
-        <p className="w-[64px] flex flex-col justify-center items-center gap-[10px] ">
-          Image
-        </p>
-        <p className="w-[235px] flex flex-col justify-center items-start gap-[10px] ">
-          Product Name
-        </p>
-        <p className="w-[249px] flex flex-col justify-center items-center gap-[10px] ">
-          SKU
-        </p>
-        <p className="w-[249px] flex flex-col justify-center items-center gap-[10px] ">
-          Category
-        </p>
-        <p className="w-[249px] flex flex-col justify-center items-center gap-[10px] ">
-          Price
-        </p>
-        <p className="w-[249px] flex flex-col justify-center items-center gap-[10px] ">
-          Stock Quantity
-        </p>
-        <p className="w-[249px] flex flex-col justify-center items-center gap-[10px] ">
-          Status
-        </p>
+      <div className="header flex h-max w-full items-center justify-between gap-6 self-stretch border-b-[1px] px-6 py-3">
+        <p className="flex w-[64px] flex-col items-center justify-center gap-[10px]">Image</p>
+        <p className="flex w-[235px] flex-col items-start justify-center gap-[10px]">Product Name</p>
+        <p className="flex w-[249px] flex-col items-center justify-center gap-[10px]">SKU</p>
+        <p className="flex w-[249px] flex-col items-center justify-center gap-[10px]">Category</p>
+        <p className="flex w-[249px] flex-col items-center justify-center gap-[10px]">Price</p>
+        <p className="flex w-[249px] flex-col items-center justify-center gap-[10px]">Stock Quantity</p>
+        <p className="flex w-[249px] flex-col items-center justify-center gap-[10px]">Status</p>
 
-        <Link
-          href={""}
-          className="w-[80px] flex flex-col justify-center items-center gap-[10px] "
-        >
-          <Button name={"CSV"} backgroundColor="#0B97A7" />
+        <Link href={""} className="flex w-[80px] flex-col items-center justify-center gap-[10px]">
+          <Button name={"CSV"} backgroundColor="#0B97A7" onClick={downloadCSV} />
         </Link>
       </div>
       {Array.isArray(products.data.items) && products.data.items.length > 0 ? (
@@ -143,40 +105,43 @@ export default function ProductsTable({
       ) : (
         <li>No products available</li>
       )}
-      <div className="w-full h-[100px] flex justify-end items-center">
-        <ReactPaginate
-          pageCount={products.data.pages}
-          className="w-[300px] flex justify-between"
-          nextLabel={
-            <AiOutlineRight
-              className="mt-1"
-              onClick={handleNextClick}
-            ></AiOutlineRight>
-          }
-          previousLabel={
-            <AiOutlineLeft
-              className="mt-1"
-              onClick={handlePrevClick}
-            ></AiOutlineLeft>
-          }
-        />
-      </div>
-      {activeModal === "logout" && (
-        <Logout onClose={async () => setActiveModal(null)} isVisible={true} />
-      )}
+
+      {activeModal === "logout" && <Logout onClose={async () => setActiveModal(null)} isVisible={true} />}
       {activeModal === "addProduct" && (
-        <CreateProductModal
-          onClose={async () => setActiveModal(null)}
-          isVisible={true}
-          name={"Add new product"}
-          productNameProps={name}
-          skuProps={sku}
-          categoryProps={category}
-          priceProps={0}
-          quantityProps={0}
-          imageProps={image}
-        />
+        <CreateProductModal onClose={async () => setActiveModal(null)} isVisible={true} name={"Add product"} />
       )}
+      <Pagination
+        isHorizontal={true}
+        isVertical={false}
+        containerClass="custom-container"
+        arrowClass="custom-arrow"
+        currentPage={currentPage}
+        totalPages={Math.ceil(products.data.pages / itemsPerPage)}
+        pageItemClass="custom-page-item"
+        activeClass="active-page"
+        activeTextClass="active-text"
+        textClass="page-text"
+        displayedPagesQuartet={pagesData}
+        updatePage={(pageNumber: any) => setCurrentPage(pageNumber)}
+        goPreviousPage={() =>
+          setCurrentPage(prev => {
+            if (prev > 1) {
+              return prev - 1;
+            } else {
+              return prev;
+            }
+          })
+        }
+        goNextPage={() =>
+          setCurrentPage(next => {
+            if (next < pagesData[pagesData.length - 1]) {
+              return next + 1;
+            } else {
+              return next;
+            }
+          })
+        }
+      />
     </div>
   );
 }
