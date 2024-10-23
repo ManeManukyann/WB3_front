@@ -1,5 +1,6 @@
-import Image from "next/image";
+"use client";
+import LogIn from "./features/auth/login/page";
 
 export default function Home() {
-  return <h1>HEllo</h1>;
+  return <LogIn />;
 }
