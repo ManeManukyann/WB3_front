@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import Status from "../statuses/page";
 import { useState } from "react";
