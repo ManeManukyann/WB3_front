@@ -3,7 +3,7 @@
 
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
 import Modal from "../modal/page";
-import FillProductDescription from "../newProductDescription/page";
+import FillProductDescription from "../productDescription/page";
 
 interface ProductInformationProps {
   id: number;
