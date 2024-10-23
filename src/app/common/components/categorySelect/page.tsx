@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+interface CategoryProps {
+  title?: string;
+}
 
-export default function CategorySelect() {
+export default function CategorySelect({ title }: CategoryProps) {
   const [value, setValue] = useState("");
   const [categories, setCategories] = useState([]);
 
@@ -43,7 +46,7 @@ export default function CategorySelect() {
       value={value}
       className="inputsss flex h-12 w-full items-center gap-3 self-stretch rounded-xl border border-dark py-3 pl-4 pr-[47px] text-left text-gray-300"
     >
-      <option value="" disabled>
+      <option value={""} disabled>
         Category
       </option>
       {categories.map((category: any) => (
