@@ -1,7 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
-import Link from "next/link";
 import Modal from "../modal/page";
 import FillProductDescription from "../newProductDescription/page";
 
@@ -21,7 +21,6 @@ interface ProductInformationProps {
 }
 
 export default function ProductInformation({
-  id,
   isVisible,
   onClose,
   name,
@@ -32,34 +31,23 @@ export default function ProductInformation({
   price,
   title,
   status,
-  description,
+  description
 }: ProductInformationProps) {
   if (!isVisible) return null;
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center flex-col">
-      <div className="flex flex-col p-5 border w-[560px] h-max shadow-lg rounded-md bg-white gap-6 ">
-        <div className="flex items-start justify-between ">
-          <h1 className="w-[205px] h-[26px] text-borderColor text-[20px] font-semibold leading-line1">
-            {name}
-          </h1>
-          <div
-            className="w-[30px] h-max  px-2 py-2 bg-iconDivColor rounded-lg"
-            onClick={onClose}
-          >
+    <div className="fixed inset-0 flex h-full w-full flex-col items-center justify-center overflow-y-auto bg-gray-600 bg-opacity-50">
+      <div className="flex h-max w-[560px] flex-col gap-6 rounded-md border bg-white p-5 shadow-lg">
+        <div className="flex items-start justify-between">
+          <h1 className="h-[26px] w-[205px] text-[20px] font-semibold leading-line1 text-borderColor">{name}</h1>
+          <div className="h-max w-[30px] rounded-lg bg-iconDivColor px-2 py-2" onClick={onClose}>
             <img src="/icons/x.svg" alt="" />
           </div>
         </div>
         <TabGroup>
-          <TabList className="w-[100%] h-[32px] flex justify-between flex-center self-stretch items-center pb-10    ">
-            <Tab className="w-[163px] h-[20px] flex px-3 py-[6px] justify-center items-center  border-b-[1px] ">
-              Details
-            </Tab>
-            <Tab className="w-[163px] h-[20px] flex px-3 py-[6px] justify-center items-center  border-b-[1px]">
-              Description
-            </Tab>
-            <Tab className="w-[163px] h-[20px] flex px-3 py-[6px] justify-center items-center  border-b-[1px]">
-              History
-            </Tab>
+          <TabList className="flex-center flex h-[32px] w-[100%] items-center justify-between self-stretch pb-10">
+            <Tab className="flex h-[20px] w-[163px] items-center justify-center border-b-[1px] px-3 py-[6px]">Details</Tab>
+            <Tab className="flex h-[20px] w-[163px] items-center justify-center border-b-[1px] px-3 py-[6px]">Description</Tab>
+            <Tab className="flex h-[20px] w-[163px] items-center justify-center border-b-[1px] px-3 py-[6px]">History</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -75,10 +63,7 @@ export default function ProductInformation({
               />
             </TabPanel>
             <TabPanel>
-              <FillProductDescription
-                name={"Product Description"}
-                description={description}
-              />
+              <FillProductDescription name={"Product Description"} description={description} />
             </TabPanel>
             <TabPanel>History</TabPanel>
           </TabPanels>
