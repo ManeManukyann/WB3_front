@@ -13,7 +13,7 @@ export default function SelectComponent() {
       id="options"
       value={selectedOption}
       onChange={handleSelectChange}
-      className="border  border-dark rounded-md px-4 py-3 text-gray-300"
+      className="rounded-md border border-dark px-4 py-3 text-gray-300"
     >
       <option value="" disabled>
         Select
