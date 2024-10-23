@@ -1,52 +1,52 @@
 "use client";
-// It isn't finish at all
 
 import Button from "@/app/common/components/buttons";
 import Input from "@/app/common/components/inputs/page";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function SignUp() {
+  const [error, setError] = useState("");
   const router = useRouter();
   const doPostRequestFromSignup = async () => {
     const inputs = document.querySelectorAll<HTMLInputElement>(".inputsss");
-    const values = Array.from(inputs).map((input) => input.value);
+    const values = Array.from(inputs).map(input => input.value);
 
     const response = await fetch("http://localhost:3003/auth/signup", {
       method: "POST",
       body: JSON.stringify({
+        fullname: values[0],
         email: values[1],
-        password: values[2],
+        password: values[2]
       }),
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     });
 
-    console.log(await response.json());
+    const data = await response.json();
+
     if (response.ok) {
       router.push("/features/products/getAllProducts");
+    } else if (!values[0] || !values[1] || !values[2]) {
+      setError("All fields are required");
     } else {
-      alert("Login error");
+      setError(data.meta.error.message);
     }
   };
 
   return (
-    <div className="flex justify-center items-center w-full h-screen bg-bg">
-      <div className="flex w-max h-max p-6 flex-col items-center shrink-0 bg-logInBoxColor rounded-sm gap-6">
-        <p className="text-textColor text-center font-poppins text-lg normal font-medium leading-line3">
-          Registration
-        </p>
-        <div className="w-[352px] h-max flex flex-col items-start gap-3 self-stretch ">
+    <div className="flex h-screen w-full items-center justify-center bg-bg">
+      <div className="flex h-max w-max shrink-0 flex-col items-center gap-6 rounded-sm bg-logInBoxColor p-6">
+        <p className="normal text-center font-poppins text-lg font-medium leading-line3 text-textColor">Registration</p>
+        <div className="flex h-max w-[352px] flex-col items-start gap-3 self-stretch">
           <Input placeholder="Full Name" text={"text"} />
           <Input placeholder="Email" text={"email"} />
           <Input placeholder="Password" text={"password"} />
         </div>
-        <Button
-          name="Sign Up"
-          backgroundColor="#0B97A7"
-          onClick={doPostRequestFromSignup}
-        />
+        <p className="text-red">{error}</p>
+        <Button name="Sign Up" backgroundColor="#0B97A7" onClick={doPostRequestFromSignup} />
         <p className="text-md">
           If you already have an account{" "}
           <Link href="/features/auth/login" className="text-md text-medium">
