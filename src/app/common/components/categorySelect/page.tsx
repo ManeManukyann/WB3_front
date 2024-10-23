@@ -1,11 +1,8 @@
 "use client";
 
-interface SelectProps {
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
 import { useEffect, useState } from "react";
 
-export default function CategorySelect({ onChange }: SelectProps) {
+export default function CategorySelect() {
   const [value, setValue] = useState("");
   const [categories, setCategories] = useState([]);
 
@@ -13,8 +10,8 @@ export default function CategorySelect({ onChange }: SelectProps) {
     const response = await fetch(`http://localhost:3003/categories/`, {
       method: "GET",
       headers: {
-        "Content-type": "application/json",
-      },
+        "Content-type": "application/json"
+      }
     });
 
     if (!response.ok) {
@@ -30,7 +27,7 @@ export default function CategorySelect({ onChange }: SelectProps) {
         const categoriesData = await getAllCategories();
         setCategories(categoriesData);
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        return error;
       }
     };
 
@@ -44,7 +41,7 @@ export default function CategorySelect({ onChange }: SelectProps) {
     <select
       onChange={handleSelectChange}
       value={value}
-      className="inputsss flex h-12 w-full items-center gap-3 self-stretch rounded-xl border border-dark pl-4 pr-[47px] py-3 text-left text-gray-300"
+      className="inputsss flex h-12 w-full items-center gap-3 self-stretch rounded-xl border border-dark py-3 pl-4 pr-[47px] text-left text-gray-300"
     >
       <option value="" disabled>
         Category

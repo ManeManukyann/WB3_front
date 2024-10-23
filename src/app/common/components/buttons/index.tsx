@@ -8,26 +8,16 @@ interface ButtonProps {
   height?: number;
 }
 
-export default function Button({
-  name,
-  onClick,
-  backgroundColor,
-  textColor,
-  width,
-  height,
-}: ButtonProps) {
+export default function Button({ name, onClick, backgroundColor, textColor, width, height }: ButtonProps) {
   return (
     <button
-      className="w-full flex px-8 py-3 flex-col justify-center items-center gap-3 self-stretch rounded-md"
+      className="flex w-full flex-col items-center justify-center gap-3 self-stretch rounded-md px-8 py-3"
       onClick={onClick}
       style={{ backgroundColor, width: width, height: height }}
     >
-      <span
-        className="text-logInBoxColor normal font-poppins text-md font-semibold leading-line3"
-        style={{ color: textColor }}
-      >
+      <p className="normal font-poppins text-md font-semibold leading-line3 text-logInBoxColor" style={{ color: textColor }}>
         {name}
-      </span>
+      </p>
     </button>
   );
 }

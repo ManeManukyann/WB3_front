@@ -5,20 +5,14 @@ interface DescriptionProps {
   description: string;
 }
 
-export default function FillProductDescription({
-  description,
-}: DescriptionProps) {
+export default function FillProductDescription({ description }: DescriptionProps) {
   return (
     <>
-      <div className="w-full h-[188px] p-4 border border-borderColor rounded-md">
+      <div className="h-[188px] w-full rounded-md border border-borderColor p-4">
         <p>{description}</p>
       </div>
-      <div className="buttons w-full h-max p-2 flex justify-end items-start self-stretch gap-2">
-        <Button
-          name={"Back"}
-          backgroundColor={"#0F16170D"}
-          textColor={"#0E373C"}
-        />
+      <div className="buttons flex h-max w-full items-start justify-end gap-2 self-stretch p-2">
+        <Button name={"Back"} backgroundColor={"#0F16170D"} textColor={"#0E373C"} />
         <Button name={"Add"} backgroundColor={"#0B97A7"} />
       </div>
     </>
