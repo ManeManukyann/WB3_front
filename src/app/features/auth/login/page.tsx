@@ -23,6 +23,8 @@ export default function LogIn() {
       }
     });
     const data = await response.json();
+    const token = data.data.token;
+    localStorage.setItem("token", token);
 
     if (response.ok) {
       router.push("/features/products/getAllProducts");
