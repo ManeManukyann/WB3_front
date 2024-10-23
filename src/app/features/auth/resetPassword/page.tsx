@@ -3,11 +3,9 @@ import Input from "@/app/common/components/inputs/page";
 
 export default function createNewPassword() {
   return (
-    <div className="flex justify-center items-center w-full h-screen bg-bg">
-      <div className="flex w-[400px] h-max p-6 flex-col items-center shrink-0 bg-logInBoxColor rounded-sm gap-6">
-        <p className="text-textColor text-center font-poppins text-lg1 normal font-medium leading-line3">
-          Enter new password
-        </p>
+    <div className="flex h-screen w-full items-center justify-center bg-bg">
+      <div className="flex h-max w-[400px] shrink-0 flex-col items-center gap-6 rounded-sm bg-logInBoxColor p-6">
+        <p className="normal text-center font-poppins text-lg1 font-medium leading-line3 text-textColor">Enter new password</p>
         <Input placeholder="Password" text={"password"} />
         <Button name="Reset password" backgroundColor="#0B97A7" />
       </div>
