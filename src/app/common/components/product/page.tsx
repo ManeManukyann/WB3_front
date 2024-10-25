@@ -2,7 +2,7 @@
 "use client";
 import Status from "../statuses/page";
 import { useState } from "react";
-import EditModal from "../modals/editModal/page";
+import EditProduct from "../modals/editModal/page";
 import ProductInformation from "../modals/infoModal/page";
 import DeleteProduct from "../modals/deleteModal/page";
 
@@ -66,8 +66,7 @@ export default function Product({ id, image, name, sku, title, price, quantity, 
       )}
 
       {activeModal === "edit" && (
-        <EditModal
-          id={id}
+        <EditProduct
           isVisible={true}
           name={"Edit Product"}
           productNameProps={name}
@@ -77,6 +76,8 @@ export default function Product({ id, image, name, sku, title, price, quantity, 
           quantityProps={quantity}
           imageProps={image}
           onClose={async () => setActiveModal(null)}
+          id={id}
+          descriptionProps={description}
         />
       )}
 
