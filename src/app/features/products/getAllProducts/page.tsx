@@ -110,38 +110,40 @@ export default function ProductsTable() {
       {activeModal === "addProduct" && (
         <CreateProductModal onClose={async () => setActiveModal(null)} isVisible={true} name={"Add product"} />
       )}
-      <Pagination
-        isHorizontal={true}
-        isVertical={false}
-        containerClass="custom-container"
-        arrowClass="custom-arrow"
-        currentPage={currentPage}
-        totalPages={Math.ceil(products.data.pages / itemsPerPage)}
-        pageItemClass="custom-page-item"
-        activeClass="active-page"
-        activeTextClass="active-text"
-        textClass="page-text"
-        displayedPagesQuartet={pagesData}
-        updatePage={(pageNumber: any) => setCurrentPage(pageNumber)}
-        goPreviousPage={() =>
-          setCurrentPage(prev => {
-            if (prev > 1) {
-              return prev - 1;
-            } else {
-              return prev;
-            }
-          })
-        }
-        goNextPage={() =>
-          setCurrentPage(next => {
-            if (next < pagesData[pagesData.length - 1]) {
-              return next + 1;
-            } else {
-              return next;
-            }
-          })
-        }
-      />
+      <div className="flex h-max w-full items-center justify-end">
+        <Pagination
+          isHorizontal={true}
+          isVertical={false}
+          containerClass="custom-container"
+          arrowClass="custom-arrow"
+          currentPage={currentPage}
+          totalPages={Math.ceil(products.data.pages / itemsPerPage)}
+          pageItemClass="custom-page-item"
+          activeClass="active-page"
+          activeTextClass="active-text"
+          textClass="page-text"
+          displayedPagesQuartet={pagesData}
+          updatePage={(pageNumber: any) => setCurrentPage(pageNumber)}
+          goPreviousPage={() =>
+            setCurrentPage(prev => {
+              if (prev > 1) {
+                return prev - 1;
+              } else {
+                return prev;
+              }
+            })
+          }
+          goNextPage={() =>
+            setCurrentPage(next => {
+              if (next < pagesData[pagesData.length - 1]) {
+                return next + 1;
+              } else {
+                return next;
+              }
+            })
+          }
+        />
+      </div>
     </div>
   );
 }
