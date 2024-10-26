@@ -2,9 +2,13 @@
 "use client";
 
 import Status from "../../statuses/page";
+import DeleteProduct from "../deleteModal/page";
+import EditProduct from "../editModal/page";
+import { useState } from "react";
 
 interface ModalProps {
   name: string;
+  id: number;
   image: string;
   productName: string;
   sku: string;
@@ -12,14 +16,16 @@ interface ModalProps {
   price: number;
   quanitity: number;
   status: string;
+  description: string;
 }
 
-export default function Modal({ image, productName, sku, title, price, quanitity }: ModalProps) {
+export default function Modal({ image, productName, sku, title, price, quanitity, id, description }: ModalProps) {
+  const [activateModal, setActivateModal] = useState<"edit" | "delete" | null>(null);
   return (
     <>
       <div className="flex h-[188px] w-full items-start gap-5 self-stretch">
         <div>
-          <img src={`http://localhost:3003/${[image]}`} alt="" className="h-[188px] w-[188px] rounded-md" />
+          <img src={`http://localhost:3003/${[image]}`} alt="" className="h-max w-full rounded-md" />
         </div>
         <div className="flex h-[188px] w-[352px] flex-col items-start gap-3">
           <div className="flex h-[20px] w-full min-w-[200px] items-center justify-between self-stretch">
@@ -51,13 +57,31 @@ export default function Modal({ image, productName, sku, title, price, quanitity
         </div>
       </div>
       <div className="flex h-[63.4px] w-full items-start justify-end gap-2 self-stretch pt-5">
-        <div className="h-max w-[30px] rounded-lg bg-iconDivColor px-2 py-2">
+        <div className="h-max w-[30px] rounded-lg bg-iconDivColor px-2 py-2" onClick={() => setActivateModal("edit")}>
           <img src="/icons/edit.svg" alt="" />
         </div>
-        <div className="h-max w-[30px] rounded-lg bg-iconDivColor px-2 py-2">
+        <div className="h-max w-[30px] rounded-lg bg-iconDivColor px-2 py-2" onClick={() => setActivateModal("delete")}>
           <img src="/icons/delete.svg" alt="" />
         </div>
       </div>
+      {activateModal === "edit" && (
+        <EditProduct
+          isVisible={true}
+          name={"Edit Product"}
+          productNameProps={productName}
+          skuProps={sku}
+          titleProps={title}
+          priceProps={price}
+          quantityProps={quanitity}
+          imageProps={image}
+          onClose={async () => setActivateModal(null)}
+          id={id}
+          descriptionProps={description}
+        />
+      )}
+      {activateModal === "delete" && (
+        <DeleteProduct isVisible={true} onClose={async () => setActivateModal(null)} productId={id} />
+      )}
     </>
   );
 }
