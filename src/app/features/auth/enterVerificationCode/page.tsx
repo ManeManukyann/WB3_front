@@ -1,18 +1,47 @@
+"use client";
 import Button from "@/app/common/components/buttons";
 import Input from "@/app/common/components/inputs/page";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function EnterVerificationCode() {
+  const router = useRouter();
+  const [error, setError] = useState("");
+  const verificateCode = async () => {
+    const inputs = document.querySelectorAll<HTMLInputElement>(".inputsss");
+    const values = Array.from(inputs).map(input => input.value || "");
+    const verificationToken = localStorage.getItem("verificationToken");
+
+    const response = await fetch("http://localhost:3003/auth/check-code", {
+      method: "POST",
+      body: JSON.stringify({
+        code: values[0]
+      }),
+      headers: {
+        Authorization: `Bearer ${verificationToken}`,
+        "Content-Type": "application/json"
+      }
+    });
+    const data = await response.json();
+    localStorage.setItem("reset_token", data.data.reset_token);
+
+    if (response.ok) {
+      router.push("/features/auth/resetPassword");
+    } else if (data.meta.error === "Unknown error") {
+      setError("Something went wrong, please try again.");
+    } else {
+      setError(data.meta.error.message);
+    }
+  };
   return (
-    <div className="flex justify-center items-center w-full h-[902px] bg-bg">
-      <div className="flex w-[400px] h-max p-6 flex-col items-center shrink-0 bg-logInBoxColor rounded-sm gap-6">
-        <p className="text-textColor text-center font-poppins text-lg1 normal font-medium leading-line3">
+    <div className="flex h-screen w-full items-center justify-center bg-bg">
+      <div className="flex h-max w-[400px] shrink-0 flex-col items-center gap-6 rounded-sm bg-logInBoxColor p-6">
+        <p className="normal text-center font-poppins text-lg1 font-medium leading-line3 text-textColor">
           Enter the code you received by email
         </p>
         <Input placeholder="Enter your code" text="text" />
-        <Link href={"/features/auth/resetPassword"} className="w-full">
-          <Button name="Send" backgroundColor={"#0B97A7"} />
-        </Link>
+        <p className="text-red">{error}</p>
+        <Button name="Send" backgroundColor={"#0B97A7"} onClick={verificateCode} />
       </div>
     </div>
   );

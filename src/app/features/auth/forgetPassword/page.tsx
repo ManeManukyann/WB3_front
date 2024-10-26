@@ -21,9 +21,12 @@ export default function ForgetPassword() {
       }
     });
     const data = await response.json();
+    localStorage.setItem("verificationToken", data.data.verification_token);
 
     if (response.ok) {
       router.push("/features/auth/enterVerificationCode");
+    } else if (data.meta.error.message === "Unknown error") {
+      setError("Something went wrong, please try again.");
     } else {
       setError(data.meta.error.message);
     }

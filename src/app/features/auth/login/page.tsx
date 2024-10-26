@@ -28,6 +28,8 @@ export default function LogIn() {
 
     if (response.ok) {
       router.push("/features/products/getAllProducts");
+    } else if (data.meta.error.message === "Unknown error") {
+      setError("Something went wrong, please try again.");
     } else {
       setError(data.meta.error.message);
     }
