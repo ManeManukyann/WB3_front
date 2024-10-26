@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
 import Modal from "../modal/page";
-import FillProductDescription from "../productDescription/page";
+import ReadProductDescription from "../productDescription/page";
 
 interface ProductInformationProps {
   id: number;
@@ -31,7 +32,8 @@ export default function ProductInformation({
   price,
   title,
   status,
-  description
+  description,
+  id
 }: ProductInformationProps) {
   if (!isVisible) return null;
   return (
@@ -60,10 +62,22 @@ export default function ProductInformation({
                 price={price}
                 quanitity={quantity}
                 status={status}
+                id={id}
+                description={description}
               />
             </TabPanel>
             <TabPanel>
-              <FillProductDescription name={"Product Description"} description={description} />
+              <ReadProductDescription
+                name={"Product Description"}
+                description={description}
+                productName={productName}
+                sku={sku}
+                title={title}
+                price={price}
+                quantity={quantity}
+                image={image}
+                id={id}
+              />
             </TabPanel>
             <TabPanel>History</TabPanel>
           </TabPanels>
