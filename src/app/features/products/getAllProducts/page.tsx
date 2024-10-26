@@ -7,7 +7,7 @@ import SearchInput from "@/app/common/components/searchInput/page";
 import Product from "@/app/common/components/product/page";
 import Link from "next/link";
 import Logout from "@/app/common/components/modals/logoutModal/page";
-import CreateProductModal from "@/app/common/components/modals/addNewProduct/newProductModal/page";
+import CreateProductModal from "@/app/common/components/modals/addNewProduct/page";
 import Pagination from "@/app/common/components/pagination/page";
 export const getAllProducts = async (page: number) => {
   try {
