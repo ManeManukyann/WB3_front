@@ -24,7 +24,9 @@ export default function LogIn() {
     });
     const data = await response.json();
     const token = data.data.token;
+    const fullname = data.data.fullname;
     localStorage.setItem("token", token);
+    localStorage.setItem("fullname", fullname);
 
     if (response.ok) {
       router.push("/features/products/getAllProducts");
