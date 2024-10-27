@@ -4,7 +4,7 @@ const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
     extend: {
@@ -15,7 +15,7 @@ const config: Config = {
           black1: "#9EA2A2",
           black2: "#CFD0D1",
           black3: "#0E1617",
-          black4: "#F3F3F3",
+          black4: "#F3F3F3"
         },
         textColor: "#0F1617",
         bg: "#FAFAFA",
@@ -29,7 +29,7 @@ const config: Config = {
         inputTextColor: "#f6f9f9",
         modalTextColor: "#0f1617cc",
         modalDescription: "#0f161766",
-        modalPColor: "#0F181733",
+        modalPColor: "#0F181733"
       },
       fontSize: {
         lg: "32px",
@@ -37,10 +37,10 @@ const config: Config = {
         lg2: "16px",
         md: "14px",
         sm: "13px",
-        xs: "10px",
+        xs: "10px"
       },
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"]
       },
       lineHeight: {
         line1: "26px",
@@ -48,21 +48,21 @@ const config: Config = {
         line3: "19.6px",
         line4: "18.2px",
         line5: "14px",
-        line6: "41.6px",
+        line6: "41.6px"
       },
       fontWeight: {
         semibold: "600",
         medium: "500",
-        regular: "400",
+        regular: "400"
       },
       borderRadius: {
         sm: "8px",
         md: "12px",
         md1: "16px",
-        lg: "24px",
-      },
-    },
+        lg: "24px"
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 };
 export default config;
