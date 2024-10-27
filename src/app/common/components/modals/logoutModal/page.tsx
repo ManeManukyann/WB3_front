@@ -7,6 +7,10 @@ interface DeleteProductProps {
 
 export default function Logout({ isVisible, onClose }: DeleteProductProps) {
   if (!isVisible) return null;
+  const handleDelete = () => {
+    localStorage.getItem("token");
+    localStorage.removeItem("token");
+  };
   return (
     <div className="fixed inset-0 flex h-full w-full flex-col items-center justify-center overflow-y-auto bg-gray-600 bg-opacity-50">
       <div
@@ -19,7 +23,7 @@ export default function Logout({ isVisible, onClose }: DeleteProductProps) {
         <div className="flex w-full items-start justify-end gap-2 self-stretch">
           <Button name={"No, cancel"} backgroundColor={"#0F16170D"} textColor="#0E373C" />
           <Link href={"/"}>
-            <Button name={"Yes, logout"} backgroundColor={"#FE125F"} />
+            <Button name={"Yes, logout"} backgroundColor={"#FE125F"} onClick={handleDelete} />
           </Link>
         </div>
       </div>
