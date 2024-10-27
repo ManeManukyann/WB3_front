@@ -23,9 +23,9 @@ export default function Modal({ image, productName, sku, title, price, quanitity
   const [activateModal, setActivateModal] = useState<"edit" | "delete" | null>(null);
   return (
     <>
-      <div className="flex h-[188px] w-full items-start gap-5 self-stretch">
+      <div className="flex h-[188px] w-[full] items-start gap-5 self-stretch">
         <div>
-          <img src={`http://localhost:3003/${[image]}`} alt="" className="h-max w-full rounded-md" />
+          <img src={`http://localhost:3003/${[image]}`} alt="" className="h-max w-[188px] rounded-md" />
         </div>
         <div className="flex h-[188px] w-[352px] flex-col items-start gap-3">
           <div className="flex h-[20px] w-full min-w-[200px] items-center justify-between self-stretch">
