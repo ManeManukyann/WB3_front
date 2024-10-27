@@ -1,6 +1,5 @@
 "use client";
 import Button from "../../buttons";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface DeleteProductProps {
@@ -10,7 +9,6 @@ interface DeleteProductProps {
 }
 
 export default function DeleteProduct({ onClose, productId }: DeleteProductProps) {
-  const router = useRouter();
   const [error, setError] = useState("");
   const handleDelete = async (id: number) => {
     const token = localStorage.getItem("token");
@@ -27,7 +25,9 @@ export default function DeleteProduct({ onClose, productId }: DeleteProductProps
       const errorData = await response.json();
       setError(errorData.meta.error.message);
     } else {
-      router.refresh();
+      setTimeout(() => {
+        window.location.reload();
+      }, 0);
     }
     onClose();
   };
