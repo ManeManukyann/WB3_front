@@ -59,12 +59,21 @@ export default function ProductsTable() {
     fetchProducts();
   }, [currentPage]);
 
+  const [fullname, setFullname] = useState<string | null>("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const setName = localStorage.getItem("fullname");
+      setFullname(setName);
+    }
+  }, []);
+
   return (
     <div className="flex h-screen w-full flex-col items-start gap-4 bg-bg py-4 pl-4 pr-6">
       <div className="header flex h-[48px] w-full items-center justify-between self-stretch">
         <div id="user" className="flex h-max w-max items-center gap-3 rounded-sm bg-logInBoxColor px-4 py-2">
           <p className="userName overflow-hidden text-ellipsis font-poppins text-md font-semibold leading-line3 text-borderColor">
-            {localStorage.getItem("fullname")}
+            {fullname}
           </p>
           <div className="flex items-center gap-[10px] rounded-lg bg-slate-100 p-2" onClick={() => setActiveModal("logout")}>
             <img src="/icons/logout.svg" alt="" className="h-[16px] w-[16px]" />
