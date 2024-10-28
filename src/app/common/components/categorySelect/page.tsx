@@ -2,9 +2,14 @@
 
 import { useEffect, useState } from "react";
 
-export default function CategorySelect() {
+interface CategoryProps {
+  onChange?: (value: string) => void;
+}
+
+export default function CategorySelect({ onChange }: CategoryProps) {
   const [value, setValue] = useState("");
   const [categories, setCategories] = useState([]);
+  const [error, setError] = useState("");
 
   const getAllCategories = async () => {
     const response = await fetch(`http://localhost:3003/categories/`, {
@@ -14,32 +19,42 @@ export default function CategorySelect() {
       }
     });
 
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status} ${response.statusText}`);
-    }
     const data = await response.json();
+    if (!response.ok) {
+      if (data.meta.error.message === "Unknown error") {
+        setError("Something went wrong, please try again.");
+      } else {
+        setError(data.meta.error.message);
+      }
+    }
     const options = data.data.categories;
     return options;
   };
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const categoriesData = await getAllCategories();
         setCategories(categoriesData);
-      } catch (error) {
-        return error;
+      } catch {
+        setError(error);
       }
     };
 
     fetchCategories();
   }, []);
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setValue(event.target.value);
+
+  const handleChange = (e: any) => {
+    const selectedValue = e.target.value;
+    setValue(selectedValue);
+    if (onChange) {
+      onChange(selectedValue);
+    }
   };
 
   return (
     <select
-      onChange={handleSelectChange}
+      onChange={handleChange}
       value={value}
       className="inputsss flex h-12 w-full items-center gap-3 self-stretch rounded-xl border border-dark py-3 pl-4 pr-[47px] text-left text-gray-300"
     >
@@ -51,6 +66,7 @@ export default function CategorySelect() {
           {category.title}
         </option>
       ))}
+      <p className="text-red">{error}</p>
     </select>
   );
 }
