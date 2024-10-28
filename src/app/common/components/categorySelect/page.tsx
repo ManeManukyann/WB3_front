@@ -2,11 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-interface CategoryProps {
-  title?: string;
-}
-
-export default function CategorySelect({ title }: CategoryProps) {
+export default function CategorySelect() {
   const [value, setValue] = useState("");
   const [categories, setCategories] = useState([]);
 
