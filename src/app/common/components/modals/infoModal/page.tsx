@@ -46,10 +46,9 @@ export default function ProductInformation({
           </div>
         </div>
         <TabGroup>
-          <TabList className="flex-center flex h-[32px] w-[100%] items-center justify-between self-stretch pb-10">
+          <TabList className="flex-center flex h-[32px] w-[100%] items-center justify-evenly self-stretch pb-10">
             <Tab className="flex h-[20px] w-[163px] items-center justify-center border-b-[1px] px-3 py-[6px]">Details</Tab>
             <Tab className="flex h-[20px] w-[163px] items-center justify-center border-b-[1px] px-3 py-[6px]">Description</Tab>
-            <Tab className="flex h-[20px] w-[163px] items-center justify-center border-b-[1px] px-3 py-[6px]">History</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -79,7 +78,6 @@ export default function ProductInformation({
                 id={id}
               />
             </TabPanel>
-            <TabPanel>History</TabPanel>
           </TabPanels>
         </TabGroup>
       </div>
