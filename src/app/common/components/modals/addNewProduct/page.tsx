@@ -74,6 +74,9 @@ export default function CreateProductModal({ name, onClose, isVisible }: CreateP
     const data = await response.json();
     if (response.ok && onClose) {
       onClose();
+      setTimeout(() => {
+        window.location.reload();
+      }, 0);
     } else if (data.meta.error.message === "Unknown error") {
       setError("Something went wrong, please try again.");
     } else {
@@ -112,7 +115,7 @@ export default function CreateProductModal({ name, onClose, isVisible }: CreateP
           <div className="details flex h-[268px] w-[280px] flex-col items-start gap-[7px]">
             <Input text={"text"} placeholder={"Name"} value={productName} onChange={e => setProductName(e.target.value)} />
             <Input text={"text"} placeholder={"SKU"} value={sku} onChange={e => setSku(e.target.value)} />
-            <CategorySelect title={title} />
+            <CategorySelect />
             <Input text={"text"} placeholder={"Price"} value={String(price)} onChange={e => setPrice(e.target.value)} />
             <Input
               text={"text"}
