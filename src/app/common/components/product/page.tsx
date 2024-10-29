@@ -23,7 +23,7 @@ export default function Product({ id, image, name, sku, title, price, quantity, 
 
   return (
     <>
-      <div className="flex h-[100px] w-full items-center justify-between gap-6 self-stretch border-b-[1px] px-6 pb-2">
+      <div className="flex h-[90px] w-full items-center justify-between gap-6 self-stretch border-b-[1px] px-6 pb-2">
         <img src={`http://localhost:3003/${[image]}`} alt="" className="h-max w-[64px] rounded-md bg-white" />
         <p className="normal w-[250px] overflow-hidden text-ellipsis font-poppins text-md font-regular leading-line3 text-textColor">
           {name}
