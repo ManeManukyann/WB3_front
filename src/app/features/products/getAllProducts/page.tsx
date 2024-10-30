@@ -80,7 +80,7 @@ export default function ProductsTable() {
   }, []);
 
   return (
-    <div className="xs:w-[320px flex h-screen w-full flex-col items-start gap-2 bg-bg py-2 pl-2 pr-2 xs:gap-5 xs:px-5 sm:gap-4 sm:py-4 sm:pl-4 sm:pr-6">
+    <div className="flex h-screen w-full flex-col items-start gap-2 bg-bg py-2 pl-2 pr-2 xs:gap-5 xs:px-5 sm:gap-4 sm:py-4 sm:pl-4 sm:pr-6">
       <div className="header flex h-[48px] w-full items-center justify-between self-stretch">
         <div id="user" className="flex h-max w-max items-center gap-3 rounded-sm bg-logInBoxColor px-4 py-2">
           <p className="userName overflow-hidden text-ellipsis font-poppins text-md font-semibold leading-line3 text-borderColor">
