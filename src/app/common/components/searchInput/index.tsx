@@ -14,7 +14,7 @@ export default function SearchInput({ value, onChange }: Props) {
       <input
         onChange={e => onChange(e.target.value)}
         placeholder={"Search"}
-        className="flex h-12 w-[248px] items-center gap-3 self-stretch rounded-xl border border-dark px-4 py-3 pr-[32px] text-left placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300"
+        className="flex h-12 w-full items-center gap-3 self-stretch rounded-xl border border-dark px-4 py-3 pr-[32px] text-left placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300"
         defaultValue={value}
       />
       <p className="absolute right-3 cursor-pointer">

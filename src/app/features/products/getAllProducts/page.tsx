@@ -80,7 +80,7 @@ export default function ProductsTable() {
   }, []);
 
   return (
-    <div className="flex h-screen w-full flex-col items-start gap-4 bg-bg py-4 pl-4 pr-6">
+    <div className="xs:w-[320px flex h-screen w-full flex-col items-start gap-2 bg-bg py-2 pl-2 pr-2 xs:gap-5 xs:px-5 sm:gap-4 sm:py-4 sm:pl-4 sm:pr-6">
       <div className="header flex h-[48px] w-full items-center justify-between self-stretch">
         <div id="user" className="flex h-max w-max items-center gap-3 rounded-sm bg-logInBoxColor px-4 py-2">
           <p className="userName overflow-hidden text-ellipsis font-poppins text-md font-semibold leading-line3 text-borderColor">
@@ -90,22 +90,32 @@ export default function ProductsTable() {
             <img src="/icons/logout.svg" alt="" className="h-[16px] w-[16px]" />
           </div>
         </div>
-        <div id="actions" className="flex h-max w-[659px] items-center gap-3">
+        <div id="actions" className="flex h-max w-max items-center gap-3">
           <SearchInput value={query} onChange={setQuery} />
           <SelectComponent value={selectedStatus} onChange={newValue => setSelectedStatus(newValue)} />
-          <Button name={"New Product"} backgroundColor="#0B97A7" onClick={() => setActiveModal("addProduct")} />
+          <div>
+            <Button name={"New Product"} backgroundColor="#0B97A7" onClick={() => setActiveModal("addProduct")} />
+          </div>
         </div>
       </div>
-      <div className="header flex h-max w-full items-center justify-between gap-6 self-stretch border-b-[1px] px-6 py-3">
-        <p className="flex w-[64px] flex-col items-center justify-center gap-[10px]">Image</p>
-        <p className="flex w-[235px] flex-col items-start justify-center gap-[10px]">Product Name</p>
-        <p className="flex w-[249px] flex-col items-center justify-center gap-[10px]">SKU</p>
-        <p className="flex w-[249px] flex-col items-center justify-center gap-[10px]">Category</p>
-        <p className="flex w-[249px] flex-col items-center justify-center gap-[10px]">Price</p>
-        <p className="flex w-[249px] flex-col items-center justify-center gap-[10px]">Stock Quantity</p>
-        <p className="flex w-[249px] flex-col items-center justify-center gap-[10px]">Status</p>
+      <div className="header flex h-max w-full items-center justify-between gap-6 self-stretch border-b-[1px] py-3 xs:pt-6 sm:px-1 md:px-6">
+        <p className="flex flex-col justify-center gap-[10px] xs:hidden sm:block sm:w-[40px] sm:items-start md:w-[64px] md:items-center">
+          Image
+        </p>
+        <p className="sm:[100px] flex flex-col justify-center gap-[10px] xs:w-[40px] sm:items-start md:w-[250px] md:items-start">
+          Product Name
+        </p>
+        <p className="flex flex-col justify-center gap-[10px] sm:w-[100px] sm:items-start md:w-[249px] md:items-center">SKU</p>
+        <p className="flex flex-col justify-center gap-[10px] sm:w-[100px] sm:items-start md:w-[249px] md:items-center">
+          Category
+        </p>
+        <p className="flex flex-col justify-center gap-[10px] sm:w-[100px] sm:items-start md:w-[249px] md:items-center">Price</p>
+        <p className="flex flex-col justify-center gap-[10px] xs:w-[40px] sm:w-[100px] sm:items-start md:w-[249px] md:items-center">
+          Stock Quantity
+        </p>
+        <p className="flex flex-col justify-center gap-[10px] sm:hidden md:block md:w-[249px] md:items-center">Status</p>
 
-        <Link href={""} className="flex w-[80px] flex-col items-center justify-center gap-[10px]">
+        <Link href={""} className="flex w-[80px] flex-col items-center justify-center gap-[10px] xs:hidden sm:block">
           <Button name={"CSV"} backgroundColor="#0B97A7" onClick={downloadCSV} />
         </Link>
       </div>

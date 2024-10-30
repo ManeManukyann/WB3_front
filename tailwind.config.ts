@@ -11,9 +11,9 @@ const config: Config = {
       screens: {
         xl: "1980px",
         lg: "1500px",
-        md: "1000px",
-        sm: "500px",
-        xs: "450px"
+        md: "1170px",
+        sm: "650px",
+        xs: "500px"
       },
       colors: {
         dark: "#0F373D",
