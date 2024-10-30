@@ -45,6 +45,7 @@ export default function ProductsTable() {
   const [currentPage, setCurrentPage] = useState(1);
   const [query, setQuery] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
+  const [debounced, setDebounced] = useState("");
   const itemsPerPage = 7;
 
   const pagesData: number[] = [];
@@ -53,13 +54,21 @@ export default function ProductsTable() {
   }
 
   useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebounced(query);
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+  }, [query]);
+
+  useEffect(() => {
     const fetchProducts = async () => {
-      const productsData = await getAllProducts(currentPage, query);
+      const productsData = await getAllProducts(currentPage, debounced);
       setProducts(productsData);
     };
 
     fetchProducts();
-  }, [currentPage, query]);
+  }, [currentPage, debounced]);
 
   const [fullname, setFullname] = useState<string | null>("");
 
