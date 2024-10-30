@@ -3,16 +3,16 @@
 import { useEffect, useState } from "react";
 import Button from "@/app/common/components/buttons";
 import SelectComponent from "@/app/common/components/select/page";
-import SearchInput from "@/app/common/components/searchInput/page";
+import SearchInput from "@/app/common/components/searchInput";
 import Product from "@/app/common/components/product/page";
 import Link from "next/link";
 import Logout from "@/app/common/components/modals/logoutModal/page";
 import CreateProductModal from "@/app/common/components/modals/addNewProduct/page";
 import Pagination from "@/app/common/components/pagination/page";
 
-export const getAllProducts = async (page: number) => {
+export const getAllProducts = async (page: number, query = "") => {
   try {
-    const response = await fetch(`http://localhost:3003/products/?page=${page}`, {
+    const response = await fetch(`http://localhost:3003/products?page=${page}&query=${query}`, {
       method: "GET"
     });
 
@@ -43,6 +43,8 @@ export default function ProductsTable() {
   const [products, setProducts] = useState({ data: { items: [], pages: 0 } });
   const [activeModal, setActiveModal] = useState<"logout" | "addProduct" | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [query, setQuery] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
   const itemsPerPage = 7;
 
   const pagesData: number[] = [];
@@ -52,12 +54,12 @@ export default function ProductsTable() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const productsData = await getAllProducts(currentPage);
+      const productsData = await getAllProducts(currentPage, query);
       setProducts(productsData);
     };
 
     fetchProducts();
-  }, [currentPage]);
+  }, [currentPage, query]);
 
   const [fullname, setFullname] = useState<string | null>("");
 
@@ -80,8 +82,8 @@ export default function ProductsTable() {
           </div>
         </div>
         <div id="actions" className="flex h-max w-[659px] items-center gap-3">
-          <SearchInput />
-          <SelectComponent />
+          <SearchInput value={query} onChange={setQuery} />
+          <SelectComponent value={selectedStatus} onChange={newValue => setSelectedStatus(newValue)} />
           <Button name={"New Product"} backgroundColor="#0B97A7" onClick={() => setActiveModal("addProduct")} />
         </div>
       </div>
@@ -117,13 +119,13 @@ export default function ProductsTable() {
         <li>No products available</li>
       )}
 
-      {activeModal === "logout" && <Logout onClose={async () => setActiveModal(null)} isVisible={true} />}
+      {activeModal === "logout" && <Logout onClose={() => setActiveModal(null)} isVisible={true} />}
       {activeModal === "addProduct" && (
-        <CreateProductModal onClose={async () => setActiveModal(null)} isVisible={true} name={"Add product"} />
+        <CreateProductModal onClose={() => setActiveModal(null)} isVisible={true} name={"Add product"} />
       )}
       <div className="flex h-max w-full items-center justify-end">
         <Pagination
-          isHorizontal={true}
+          isHorizontal
           isVertical={false}
           containerClass="custom-container"
           arrowClass="custom-arrow"
@@ -135,24 +137,8 @@ export default function ProductsTable() {
           textClass="page-text"
           displayedPagesQuartet={pagesData}
           updatePage={(pageNumber: any) => setCurrentPage(pageNumber)}
-          goPreviousPage={() =>
-            setCurrentPage(prev => {
-              if (prev > 1) {
-                return prev - 1;
-              } else {
-                return prev;
-              }
-            })
-          }
-          goNextPage={() =>
-            setCurrentPage(next => {
-              if (next < pagesData[pagesData.length - 1]) {
-                return next + 1;
-              } else {
-                return next;
-              }
-            })
-          }
+          goPreviousPage={() => setCurrentPage(prev => (prev > 1 ? prev - 1 : prev))}
+          goNextPage={() => setCurrentPage(next => (next < 1 ? next + 1 : next))}
         />
       </div>
     </div>
