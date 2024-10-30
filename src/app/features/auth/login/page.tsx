@@ -39,9 +39,9 @@ export default function LogIn() {
 
   return (
     <div className="flex h-screen w-full items-center justify-center bg-bg">
-      <div className="flex h-max w-[400px] shrink-0 flex-col items-center gap-6 rounded-sm bg-logInBoxColor p-6">
-        <p className="normal text-center font-poppins text-lg font-medium leading-line3 text-textColor">Login</p>
-        <div className="inputsss flex h-[124px] w-[352px] flex-col items-start gap-3 self-stretch">
+      <div className="flex h-max w-[400px] max-w-[90%] shrink-0 flex-col items-center gap-6 rounded-sm bg-logInBoxColor p-6 sm:max-w-[500px]">
+        <h1 className="normal text-center font-poppins text-lg font-medium leading-line3 text-textColor">Login</h1>
+        <div className="inputsss xs: flex h-auto w-full flex-col items-start gap-3 self-stretch xl:h-[124px] xl:w-[352px]">
           <Input placeholder="Email" text={"email"} />
           <Input placeholder="Password" text={"password"} />
         </div>

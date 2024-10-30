@@ -15,7 +15,7 @@ export default function EnterVerificationCode() {
     const response = await fetch("http://localhost:3003/auth/check-code", {
       method: "POST",
       body: JSON.stringify({
-        code: values[0]
+        code: values[1]
       }),
       headers: {
         Authorization: `Bearer ${verificationToken}`,
@@ -35,11 +35,13 @@ export default function EnterVerificationCode() {
   };
   return (
     <div className="flex h-screen w-full items-center justify-center bg-bg">
-      <div className="flex h-max w-[400px] shrink-0 flex-col items-center gap-6 rounded-sm bg-logInBoxColor p-6">
+      <div className="flex h-max w-[400px] max-w-[90%] shrink-0 flex-col items-center gap-6 rounded-sm bg-logInBoxColor p-6 sm:max-w-[500px]">
         <p className="normal text-center font-poppins text-lg1 font-medium leading-line3 text-textColor">
           Enter the code you received by email
         </p>
-        <Input placeholder="Enter your code" text="text" />
+        <div className="inputsss xs: flex h-auto w-full flex-col items-start gap-3 self-stretch xl:h-[124px] xl:w-[352px]">
+          <Input placeholder="Enter your code" text="text" />
+        </div>
         <p className="text-red">{error}</p>
         <Button name="Send" backgroundColor={"#0B97A7"} onClick={verificateCode} />
       </div>

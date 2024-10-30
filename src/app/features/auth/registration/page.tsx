@@ -42,9 +42,9 @@ export default function SignUp() {
 
   return (
     <div className="flex h-screen w-full items-center justify-center bg-bg">
-      <div className="flex h-max w-max shrink-0 flex-col items-center gap-6 rounded-sm bg-logInBoxColor p-6">
+      <div className="flex h-max w-[400px] max-w-[90%] shrink-0 flex-col items-center gap-6 rounded-sm bg-logInBoxColor p-6 sm:max-w-[500px]">
         <p className="normal text-center font-poppins text-lg font-medium leading-line3 text-textColor">Registration</p>
-        <div className="flex h-max w-[352px] flex-col items-start gap-3 self-stretch">
+        <div className="inputsss xs: flex h-auto w-full flex-col items-start gap-3 self-stretch xl:h-[124px] xl:w-[352px]">
           <Input placeholder="Full Name" text={"text"} />
           <Input placeholder="Email" text={"email"} />
           <Input placeholder="Password" text={"password"} />

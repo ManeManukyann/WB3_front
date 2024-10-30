@@ -15,7 +15,7 @@ export default function createNewPassword() {
     const response = await fetch("http://localhost:3003/auth/update-password", {
       method: "POST",
       body: JSON.stringify({
-        password: values[0]
+        password: values[1]
       }),
       headers: {
         Authorization: `Bearer ${resetToken}`,
@@ -35,9 +35,11 @@ export default function createNewPassword() {
   };
   return (
     <div className="flex h-screen w-full items-center justify-center bg-bg">
-      <div className="flex h-max w-[400px] shrink-0 flex-col items-center gap-6 rounded-sm bg-logInBoxColor p-6">
+      <div className="flex h-max w-[400px] max-w-[90%] shrink-0 flex-col items-center gap-6 rounded-sm bg-logInBoxColor p-6 sm:max-w-[500px]">
         <p className="normal text-center font-poppins text-lg1 font-medium leading-line3 text-textColor">Enter new password</p>
-        <Input placeholder="Password" text={"password"} />
+        <div className="inputsss xs: flex h-auto w-full flex-col items-start gap-3 self-stretch xl:h-[124px] xl:w-[352px]">
+          <Input placeholder="Password" text={"password"} />
+        </div>
         <p className="text-red">{error}</p>
         <Button name="Reset password" backgroundColor="#0B97A7" onClick={resetPassword} />
       </div>
