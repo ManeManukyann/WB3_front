@@ -53,20 +53,22 @@ export default function CategorySelect({ onChange }: CategoryProps) {
   };
 
   return (
-    <select
-      onChange={handleChange}
-      value={value}
-      className="inputsss flex h-12 w-full items-center gap-3 self-stretch rounded-xl border border-dark py-3 pl-4 pr-[47px] text-left text-gray-300"
-    >
-      <option value={""} disabled>
-        Category
-      </option>
-      {categories.map((category: any) => (
-        <option key={category.id} value={category.id}>
-          {category.title}
+    <>
+      <select
+        onChange={handleChange}
+        value={value}
+        className="inputsss flex h-12 w-full items-center gap-3 self-stretch rounded-xl border border-dark py-3 pl-4 pr-[47px] text-left text-gray-300"
+      >
+        <option value={""} disabled>
+          Category
         </option>
-      ))}
-      <p className="text-red">{error}</p>
-    </select>
+        {categories.map((category: any) => (
+          <option key={category.id} value={category.id}>
+            {category.title}
+          </option>
+        ))}
+      </select>
+      <p>{error}</p>
+    </>
   );
 }
