@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import Input from "../../inputs/page";
 import { useState } from "react";
 import Button from "../../buttons";
-import CategorySelect from "../../categorySelect/page";
+import Input from "../../inputs";
+import CategorySelect from "../../categorySelect";
 interface EditModalProps {
   id: number;
   name: string;

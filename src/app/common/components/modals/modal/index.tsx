@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import Status from "../../statuses/page";
-import DeleteProduct from "../deleteModal/page";
-import EditProduct from "../editModal/page";
 import { useState } from "react";
+import Status from "../../statuses";
+import EditProduct from "../editModal";
+import DeleteProduct from "../deleteModal";
 
 interface ModalProps {
   name: string;

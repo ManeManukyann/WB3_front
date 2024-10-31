@@ -1,6 +1,6 @@
 "use client";
-import Input from "@/app/common/components/inputs/page";
 import Button from "@/app/common/components/buttons";
+import Input from "@/app/common/components/inputs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

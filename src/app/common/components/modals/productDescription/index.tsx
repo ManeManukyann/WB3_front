@@ -1,7 +1,8 @@
+"use client";
 /* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
-import DeleteProduct from "../deleteModal/page";
-import EditProduct from "../editModal/page";
+import EditProduct from "../editModal";
+import DeleteProduct from "../deleteModal";
 
 interface DescriptionProps {
   name: string;

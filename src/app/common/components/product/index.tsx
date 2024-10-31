@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import Status from "../statuses/page";
 import { useState } from "react";
-import EditProduct from "../modals/editModal/page";
-import ProductInformation from "../modals/infoModal/page";
-import DeleteProduct from "../modals/deleteModal/page";
+import Status from "../statuses";
+import ProductInformation from "../modals/infoModal";
+import EditProduct from "../modals/editModal";
+import DeleteProduct from "../modals/deleteModal";
 
 interface ProductProps {
   id: number;

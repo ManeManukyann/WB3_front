@@ -2,10 +2,10 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import Input from "../../inputs/page";
 import { useEffect, useState } from "react";
 import Button from "../../buttons";
-import CategorySelect from "../../categorySelect/page";
+import CategorySelect from "../../categorySelect";
+import Input from "../../inputs";
 
 interface CreateProductProps {
   name: string;

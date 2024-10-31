@@ -1,13 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { useEffect, useState } from "react";
 import Button from "@/app/common/components/buttons";
 import SearchInput from "@/app/common/components/searchInput";
-import Product from "@/app/common/components/product/page";
 import Link from "next/link";
-import Logout from "@/app/common/components/modals/logoutModal/page";
-import CreateProductModal from "@/app/common/components/modals/addNewProduct/page";
-import Pagination from "@/app/common/components/pagination/page";
+import Product from "@/app/common/components/product";
+import Logout from "@/app/common/components/modals/logoutModal";
+import CreateProductModal from "@/app/common/components/modals/addNewProduct";
+import Pagination from "@/app/common/components/pagination";
 
 export default function ProductsTable() {
   const localHost = process.env.NEXT_PUBLIC_LOCAL_HOST;

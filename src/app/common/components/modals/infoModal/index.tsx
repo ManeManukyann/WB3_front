@@ -3,8 +3,8 @@
 "use client";
 
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
-import Modal from "../modal/page";
-import ReadProductDescription from "../productDescription/page";
+import Modal from "../modal";
+import ReadProductDescription from "../productDescription";
 
 interface ProductInformationProps {
   id: number;
