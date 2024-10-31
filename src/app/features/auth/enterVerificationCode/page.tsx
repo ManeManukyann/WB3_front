@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function EnterVerificationCode() {
+  const localHost = process.env.NEXT_PUBLIC_LOCAL_HOST;
   const router = useRouter();
   const [error, setError] = useState("");
   const verificateCode = async () => {
@@ -12,7 +13,7 @@ export default function EnterVerificationCode() {
     const values = Array.from(inputs).map(input => input.value || "");
     const verificationToken = localStorage.getItem("verificationToken");
 
-    const response = await fetch("http://localhost:3003/auth/check-code", {
+    const response = await fetch(`${localHost}/auth/check-code`, {
       method: "POST",
       body: JSON.stringify({
         code: values[1]

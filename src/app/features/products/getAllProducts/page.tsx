@@ -10,8 +10,9 @@ import CreateProductModal from "@/app/common/components/modals/addNewProduct/pag
 import Pagination from "@/app/common/components/pagination/page";
 
 export default function ProductsTable() {
+  const localHost = process.env.NEXT_PUBLIC_LOCAL_HOST;
   const downloadCSV = async () => {
-    const response = await fetch("http://localhost:3003/export-csv/");
+    const response = await fetch(`${localHost}/export-csv/`);
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -33,7 +34,7 @@ export default function ProductsTable() {
 
   const getAllProducts = async (page: number, query = "") => {
     try {
-      const response = await fetch(`http://localhost:3003/products?page=${page}&query=${query}`, {
+      const response = await fetch(`${localHost}/products?page=${page}&query=${query}`, {
         method: "GET"
       });
 

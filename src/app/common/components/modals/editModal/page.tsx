@@ -30,6 +30,7 @@ export default function EditProduct({
   descriptionProps,
   onClose
 }: EditModalProps) {
+  const localHost = process.env.NEXT_PUBLIC_LOCAL_HOST;
   const [productName, setProductName] = useState(productNameProps);
   const [sku, setSku] = useState(skuProps);
   const [price, setPrice] = useState(String(priceProps));
@@ -66,7 +67,7 @@ export default function EditProduct({
       formData.append("image", imageInput.files[0]);
     }
 
-    const response = await fetch(`http://localhost:3003/products/${id}`, {
+    const response = await fetch(`${localHost}/products/${id}`, {
       method: "PUT",
       body: formData,
       headers: {
@@ -80,8 +81,10 @@ export default function EditProduct({
       setTimeout(() => {
         window.location.reload();
       }, 0);
+    } else if (data.meta.error.message === "Unknown error") {
+      setError("Something went wrong, please try again");
     } else {
-      setError(data.meta.error?.message || "Something went wrong, please try again");
+      setError(data.meta.error.message);
     }
   };
 
@@ -103,7 +106,7 @@ export default function EditProduct({
             ) : (
               <img
                 id="current"
-                src={`http://localhost:3003/${imageProps}`}
+                src={`${localHost}/${imageProps}`}
                 className="absolute h-max object-cover"
                 alt="placeholder icon"
               />

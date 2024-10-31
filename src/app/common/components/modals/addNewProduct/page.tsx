@@ -14,6 +14,7 @@ interface CreateProductProps {
 }
 
 export default function CreateProductModal({ name, onClose, isVisible }: CreateProductProps) {
+  const localHost = process.env.NEXT_PUBLIC_LOCAL_HOST;
   if (!isVisible) return null;
   const [productName, setProductName] = useState("");
   const [sku, setSku] = useState("");
@@ -63,7 +64,7 @@ export default function CreateProductModal({ name, onClose, isVisible }: CreateP
       formData.append("image", imageInput.files[0]);
     }
 
-    const response = await fetch("http://localhost:3003/products/", {
+    const response = await fetch(`${localHost}/products/`, {
       method: "POST",
       body: formData,
       headers: {

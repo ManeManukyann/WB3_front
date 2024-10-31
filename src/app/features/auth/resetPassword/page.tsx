@@ -6,13 +6,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function createNewPassword() {
+  const localHost = process.env.NEXT_PUBLIC_LOCAL_HOST;
   const router = useRouter();
   const [error, setError] = useState("");
   const resetPassword = async () => {
     const inputs = document.querySelectorAll<HTMLInputElement>(".inputsss");
     const values = Array.from(inputs).map(input => input.value);
     const resetToken = localStorage.getItem("reset_token");
-    const response = await fetch("http://localhost:3003/auth/update-password", {
+    const response = await fetch(`${localHost}/auth/update-password`, {
       method: "POST",
       body: JSON.stringify({
         password: values[1]

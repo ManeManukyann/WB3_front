@@ -7,13 +7,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function SignUp() {
+  const localHost = process.env.NEXT_PUBLIC_LOCAL_HOST;
   const [error, setError] = useState("");
   const router = useRouter();
   const doPostRequestFromSignup = async () => {
     const inputs = document.querySelectorAll<HTMLInputElement>(".inputsss");
     const values = Array.from(inputs).map(input => input.value);
 
-    const response = await fetch("http://localhost:3003/auth/signup", {
+    const response = await fetch(`${localHost}/auth/signup`, {
       method: "POST",
       body: JSON.stringify({
         fullname: values[0],

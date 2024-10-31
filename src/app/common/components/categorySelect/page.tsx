@@ -7,12 +7,13 @@ interface CategoryProps {
 }
 
 export default function CategorySelect({ onChange }: CategoryProps) {
+  const localHost = process.env.NEXT_PUBLIC_LOCAL_HOST;
   const [value, setValue] = useState("");
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState("");
 
   const getAllCategories = async () => {
-    const response = await fetch(`http://localhost:3003/categories/`, {
+    const response = await fetch(`${localHost}/categories/`, {
       method: "GET",
       headers: {
         "Content-type": "application/json"

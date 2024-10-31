@@ -6,13 +6,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function LogIn() {
+  const localHost = process.env.NEXT_PUBLIC_LOCAL_HOST;
   const router = useRouter();
   const [error, setError] = useState("");
   const doPostRequestFromLogin = async () => {
     const inputs = document.querySelectorAll<HTMLInputElement>(".inputsss");
     const values = Array.from(inputs).map(input => input.value);
 
-    const response = await fetch("http://localhost:3003/auth/login", {
+    const response = await fetch(`${localHost}/auth/login`, {
       method: "POST",
       body: JSON.stringify({
         email: values[1],

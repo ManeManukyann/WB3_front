@@ -19,13 +19,14 @@ interface ProductProps {
 }
 
 export default function Product({ id, image, name, sku, title, price, quantity, status, description }: ProductProps) {
+  const localHost = process.env.NEXT_PUBLIC_LOCAL_HOST;
   const [activeModal, setActiveModal] = useState<"info" | "edit" | "delete" | null>(null);
 
   return (
     <>
       <div className="sm:gap-0sm:px-1 flex h-[90px] w-full items-center justify-between self-stretch border-b-[1px] pb-2 md:gap-6 md:px-6">
         <img
-          src={`http://localhost:3003/${[image]}`}
+          src={`${localHost}/${[image]}`}
           alt=""
           className="rounded-md bg-white xs:hidden sm:block sm:h-[40px] sm:w-[40px] md:h-max md:w-[64px]"
         />

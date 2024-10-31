@@ -9,11 +9,12 @@ interface DeleteProductProps {
 }
 
 export default function DeleteProduct({ onClose, productId }: DeleteProductProps) {
+  const localHost = process.env.NEXT_PUBLIC_LOCAL_HOST;
   const [error, setError] = useState("");
   const handleDelete = async (id: number) => {
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`http://localhost:3003/products/${id}`, {
+    const response = await fetch(`${localHost}/products/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
