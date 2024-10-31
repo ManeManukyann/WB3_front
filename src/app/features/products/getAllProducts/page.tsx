@@ -2,31 +2,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import Button from "@/app/common/components/buttons";
-import SelectComponent from "@/app/common/components/select/page";
 import SearchInput from "@/app/common/components/searchInput";
 import Product from "@/app/common/components/product/page";
 import Link from "next/link";
 import Logout from "@/app/common/components/modals/logoutModal/page";
 import CreateProductModal from "@/app/common/components/modals/addNewProduct/page";
 import Pagination from "@/app/common/components/pagination/page";
-
-export const getAllProducts = async (page: number, query = "") => {
-  try {
-    const response = await fetch(`http://localhost:3003/products?page=${page}&query=${query}`, {
-      method: "GET"
-    });
-
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status} ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    alert(error);
-  }
-  return { data: { items: [], pages: 0 } };
-};
 
 export default function ProductsTable() {
   const downloadCSV = async () => {
@@ -44,9 +25,45 @@ export default function ProductsTable() {
   const [activeModal, setActiveModal] = useState<"logout" | "addProduct" | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [query, setQuery] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState("");
   const [debounced, setDebounced] = useState("");
+  const [productVal, setProductsVal] = useState([]);
+  const [filter, setFilter] = useState("all");
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const itemsPerPage = 7;
+
+  const getAllProducts = async (page: number, query = "") => {
+    try {
+      const response = await fetch(`http://localhost:3003/products?page=${page}&query=${query}`, {
+        method: "GET"
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setProductsVal(data.data.items);
+      return data;
+    } catch (error) {
+      alert(error);
+    }
+    return { data: { items: [], pages: 0 } };
+  };
+
+  useEffect(() => {
+    getAllProducts(1);
+  }, []);
+
+  useEffect(() => {
+    const filtered = productVal.filter((product: any) => {
+      if (filter === "all") return true;
+      if (filter === "in-stock") return product.quantity > 5;
+      if (filter === "low-stock") return product.quantity > 0 && product.quantity < 5;
+      if (filter === "out-of-stock") return product.quantity === 0;
+      return false;
+    });
+    setFilteredProducts(filtered);
+  }, [filter, productVal]);
 
   const pagesData: number[] = [];
   for (let i = 1; i < products.data.pages + 1; i++) {
@@ -92,7 +109,17 @@ export default function ProductsTable() {
         </div>
         <div id="actions" className="flex h-max w-max items-center gap-3">
           <SearchInput value={query} onChange={setQuery} />
-          <SelectComponent value={selectedStatus} onChange={newValue => setSelectedStatus(newValue)} />
+          <select
+            id="options"
+            value={filter}
+            onChange={(e: any) => setFilter(e.target.value)}
+            className="rounded-md border border-dark px-4 py-3 text-gray-300 xs:hidden sm:block"
+          >
+            <option value="all">Select</option>
+            <option value="in-stock">In Stock</option>
+            <option value="low-stock">Low Stock</option>
+            <option value="out-of-stock">Out of Stock</option>
+          </select>
           <div>
             <Button name={"New Product"} backgroundColor="#0B97A7" width="155px" onClick={() => setActiveModal("addProduct")} />
           </div>
@@ -102,7 +129,7 @@ export default function ProductsTable() {
         <p className="flex flex-col justify-center gap-[10px] xs:hidden sm:block sm:w-[40px] sm:items-start md:w-[64px] md:items-center">
           Image
         </p>
-        <p className="sm:[100px] flex flex-col justify-start gap-[10px] xs:w-[80px] sm:items-start md:w-[150px] md:items-start">
+        <p className="sm:[100px] flex flex-col justify-start gap-[10px] xs:w-[px] sm:items-start md:w-[150px] md:items-start">
           Product Name
         </p>
         <p className="flex flex-col justify-center gap-[10px] sm:w-[100px] sm:items-start md:w-[249px] md:items-center">SKU</p>
@@ -119,7 +146,7 @@ export default function ProductsTable() {
         </Link>
       </div>
       {Array.isArray(products.data.items) && products.data.items.length > 0 ? (
-        products.data.items.map((product: any, index: number) => (
+        filteredProducts.map((product: any, index: number) => (
           <Product
             id={product.id}
             key={index}
