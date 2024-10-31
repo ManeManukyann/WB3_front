@@ -17,9 +17,9 @@ export default function SignUp() {
     const response = await fetch(`${localHost}/auth/signup`, {
       method: "POST",
       body: JSON.stringify({
-        fullname: values[0],
-        email: values[1],
-        password: values[2]
+        fullname: values[1],
+        email: values[2],
+        password: values[3]
       }),
       headers: {
         "Content-Type": "application/json"
