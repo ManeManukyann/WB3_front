@@ -50,9 +50,9 @@ export default function Modal({ image, productName, sku, title, price, quanitity
           </div>
           <div className="flex h-[20px] w-full min-w-[200px] items-center justify-between self-stretch">
             <p className="font-sm normal font-poppins font-regular leading-line4 text-modalDescription">Status</p>
-            <p>
+            <span>
               <Status quantity={Number(quanitity)} />
-            </p>
+            </span>
           </div>
         </div>
       </div>
