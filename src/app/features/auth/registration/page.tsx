@@ -31,9 +31,7 @@ export default function SignUp() {
     localStorage.setItem("token", token);
 
     if (response.ok) {
-      router.push("/features/products/getAllProducts");
-    } else if (!values[0] || !values[1] || !values[2]) {
-      setError("All fields are required");
+      router.push("/features/auth/login");
     } else if (data.meta.error.message === "Unknown error") {
       setError("Something went wrong, please try again.");
     } else {
