@@ -28,7 +28,7 @@ export default function Product({ id, image, name, sku, title, price, quantity, 
         <img
           src={`${localHost}/${[image]}`}
           alt=""
-          className="rounded-md bg-white xs:hidden sm:block sm:h-[40px] sm:w-[40px] md:h-max md:w-[64px]"
+          className="rounded-md bg-white xs:hidden sm:block sm:h-[40px] sm:w-[40px] md:h-[64px] md:w-[64px]"
         />
         <p className="normal overflow-hidden text-ellipsis font-poppins text-md font-regular leading-line3 text-textColor sm:w-[100px] sm:items-start md:w-[150px]">
           {name}
