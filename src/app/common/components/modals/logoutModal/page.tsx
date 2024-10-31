@@ -23,7 +23,7 @@ export default function Logout({ isVisible, onClose }: DeleteProductProps) {
         <div className="flex w-full items-start justify-end gap-2 self-stretch">
           <Button name={"No, cancel"} backgroundColor={"#0F16170D"} textColor="#0E373C" />
           <Link href={"/"}>
-            <Button name={"Yes, logout"} backgroundColor={"#FE125F"} onClick={handleDelete} />
+            <Button name={"Yes, logout"} backgroundColor={"#FE125F"} width="115px" onClick={handleDelete} />
           </Link>
         </div>
       </div>

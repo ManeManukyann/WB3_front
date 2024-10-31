@@ -94,7 +94,7 @@ export default function ProductsTable() {
           <SearchInput value={query} onChange={setQuery} />
           <SelectComponent value={selectedStatus} onChange={newValue => setSelectedStatus(newValue)} />
           <div>
-            <Button name={"New Product"} backgroundColor="#0B97A7" onClick={() => setActiveModal("addProduct")} />
+            <Button name={"New Product"} backgroundColor="#0B97A7" width="155px" onClick={() => setActiveModal("addProduct")} />
           </div>
         </div>
       </div>
@@ -102,7 +102,7 @@ export default function ProductsTable() {
         <p className="flex flex-col justify-center gap-[10px] xs:hidden sm:block sm:w-[40px] sm:items-start md:w-[64px] md:items-center">
           Image
         </p>
-        <p className="sm:[100px] flex flex-col justify-center gap-[10px] xs:w-[40px] sm:items-start md:w-[250px] md:items-start">
+        <p className="sm:[100px] flex flex-col justify-start gap-[10px] xs:w-[80px] sm:items-start md:w-[150px] md:items-start">
           Product Name
         </p>
         <p className="flex flex-col justify-center gap-[10px] sm:w-[100px] sm:items-start md:w-[249px] md:items-center">SKU</p>
@@ -113,10 +113,9 @@ export default function ProductsTable() {
         <p className="flex flex-col justify-center gap-[10px] xs:w-[40px] sm:w-[100px] sm:items-start md:w-[249px] md:items-center">
           Stock Quantity
         </p>
-        <p className="flex flex-col justify-center gap-[10px] sm:hidden md:block md:w-[249px] md:items-center">Status</p>
-
+        <p className="flex flex-col justify-center gap-[10px] sm:w-[100px] sm:items-start md:w-[249px] md:items-center">Status</p>
         <Link href={""} className="flex w-[80px] flex-col items-center justify-center gap-[10px] xs:hidden sm:block">
-          <Button name={"CSV"} backgroundColor="#0B97A7" onClick={downloadCSV} />
+          <Button name={"CSV"} backgroundColor="#0B97A7" width="80px" onClick={downloadCSV} />
         </Link>
       </div>
       {Array.isArray(products.data.items) && products.data.items.length > 0 ? (
