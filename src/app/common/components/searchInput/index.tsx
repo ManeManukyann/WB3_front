@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-// Search input write here
 "use client";
 import { CiSearch } from "react-icons/ci";
 
