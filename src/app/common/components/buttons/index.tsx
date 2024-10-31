@@ -4,14 +4,14 @@ interface ButtonProps {
   backgroundColor: string;
   textColor?: string;
   onClick?: () => void;
-  width?: number;
-  height?: number;
+  width?: string;
+  height?: string;
 }
 
 export default function Button({ name, onClick, backgroundColor, textColor, width, height }: ButtonProps) {
   return (
     <button
-      className="flex w-max flex-col items-center justify-center gap-3 self-stretch rounded-md px-8 py-3"
+      className="flex w-[350px] flex-col items-center justify-center gap-3 self-stretch rounded-md px-8 py-3"
       onClick={onClick}
       style={{ backgroundColor, width: width, height: height }}
     >
