@@ -185,7 +185,7 @@ export default function ProductsTable() {
           displayedPagesQuartet={pagesData}
           updatePage={(pageNumber: any) => setCurrentPage(pageNumber)}
           goPreviousPage={() => setCurrentPage(prev => (prev > 1 ? prev - 1 : prev))}
-          goNextPage={() => setCurrentPage(next => (next < 1 ? next + 1 : next))}
+          goNextPage={() => setCurrentPage(next => (next < pagesData[pagesData.length - 1] ? next + 1 : next))}
         />
       </div>
     </div>

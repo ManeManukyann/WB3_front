@@ -2,6 +2,8 @@ import Image from "next/image";
 
 export default function Pagination({
   isHorizontal,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  isVertical,
   containerClass,
   arrowClass,
   currentPage,
@@ -20,28 +22,40 @@ export default function Pagination({
       <button
         className={`border-secondary-darkest flex h-8 w-8 items-center justify-center rounded-full border bg-white ${currentPage === 1 ? "text-green-400" : ""} ${isHorizontal ? "-rotate-90" : ""} ${arrowClass}`}
         onClick={goPreviousPage}
-        disabled={currentPage === 1}
       >
         <Image src="/icons/arrow-up.svg" width={16} height={16} alt="arrow up" />
       </button>
 
       <div className={`flex ${isHorizontal ? "flex-row gap-x-2" : "flex-col gap-y-2"}`}>
-        {displayedPagesQuartet.map((pageNumber: number) => (
+        {currentPage > 4 && totalPages !== 5 && (
+          <div className={`flex ${isHorizontal ? "flex-row gap-x-2" : "flex-col gap-y-2"}`}>
+            <button
+              className={`border-secondary-darkest flex h-8 w-8 items-center justify-center rounded-full border bg-white ${pageItemClass}`}
+              onClick={() => updatePage(1)}
+            >
+              <p className={`text-h7 text-black ${textClass}`}>1</p>
+            </button>
+            <span className={`text-secondary-medium flex h-8 w-8 justify-center ${textClass}`}>...</span>
+          </div>
+        )}
+
+        {displayedPagesQuartet.map((pageNumber: any) => (
           <button
             key={pageNumber}
-            className={`flex h-8 w-8 items-center justify-center rounded-full border ${currentPage === pageNumber ? `${activeClass || "bg-white"} border-[#0B97A7]` : "border-secondary-darkest bg-white"} ${pageItemClass}`}
+            className={`border-secondary-darkest flex h-8 w-8 items-center justify-center rounded-full border ${currentPage === pageNumber ? `border-[#0B97A7] ${activeClass || "bg-black"}` : "bg-white"} ${pageItemClass}`}
             onClick={() => updatePage(pageNumber)}
           >
             <p
-              className={`text-h7 ${currentPage === pageNumber ? `${activeTextClass || "text-[#0B97A7]"}` : "text-black"} ${textClass}`}
+              className={`text-h7 ${currentPage === pageNumber ? `${activeTextClass || "text-white"}` : "text-black"} ${textClass}`}
             >
               {pageNumber}
             </p>
           </button>
         ))}
+
         {totalPages > 5 && !displayedPagesQuartet.includes(totalPages) && (
-          <div className="flex items-center">
-            <span className="text-secondary-medium flex h-8 w-8 justify-center">...</span>
+          <div className={`flex ${isHorizontal ? "flex-row gap-x-2" : "flex-col gap-y-2"}`}>
+            <span className={`text-secondary-medium flex h-8 w-8 justify-center ${textClass}`}>...</span>
             <button
               className={`border-secondary-darkest flex h-8 w-8 items-center justify-center rounded-full border bg-white ${pageItemClass}`}
               onClick={() => updatePage(totalPages)}
@@ -53,9 +67,8 @@ export default function Pagination({
       </div>
 
       <button
-        className={`border-secondary-darkest flex h-8 w-8 items-center justify-center rounded-full border bg-white ${currentPage === totalPages ? "text-green-400" : ""} ${isHorizontal ? "-rotate-90" : ""} ${arrowClass}`}
+        className={`border-secondary-darkest flex h-8 w-8 items-center justify-center rounded-full border bg-white ${currentPage === 1 ? "text-green-400" : ""} ${isHorizontal ? "-rotate-90" : ""} ${arrowClass}`}
         onClick={goNextPage}
-        disabled={currentPage === totalPages}
       >
         <Image src="/icons/arrow-down.svg" width={16} height={16} alt="arrow down" />
       </button>
