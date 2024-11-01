@@ -117,13 +117,8 @@ export default function CreateProductModal({ name, onClose, isVisible }: CreateP
             <Input text={"text"} placeholder={"Name"} value={productName} onChange={e => setProductName(e.target.value)} />
             <Input text={"text"} placeholder={"SKU"} value={sku} onChange={e => setSku(e.target.value)} />
             <CategorySelect />
-            <Input text={"text"} placeholder={"Price"} value={String(price)} onChange={e => setPrice(e.target.value)} />
-            <Input
-              text={"text"}
-              placeholder={"Stock Quantity"}
-              value={String(quantity)}
-              onChange={e => setQuantity(e.target.value)}
-            />
+            <Input text={"number"} placeholder={"Price"} value={price} onChange={e => setPrice(e.target.value)} />
+            <Input text={"number"} placeholder={"Stock Quantity"} value={quantity} onChange={e => setQuantity(e.target.value)} />
           </div>
         </div>
         <textarea
